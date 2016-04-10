@@ -66,7 +66,11 @@ class Pawn
 
     public function move(MovementTypeEnum $movementTypeEnum, $newX, $newY)
     {
-        throw new \Exception("Need to implement Pawn.Move()");
+    	if ($movementTypeEnum == MovementTypeEnum::MOVE() &&
+	    $newX == $this->getXCoordinate()) {
+	    $this->setXCoordinate($newX);
+	    $this->setYCoordinate($newY);
+	}
     }
 
     public function toString()
