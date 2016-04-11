@@ -1,6 +1,6 @@
 <?php
 
-namespace LogicNow;
+namespace LogicNow\Chess;
 
 class PieceColorEnum
 {
@@ -15,16 +15,20 @@ class PieceColorEnum
         $this->_id = $_id;
     }
 
-    /** @return: PieceColorEnum */
-    public static function WHITE()
+    /**
+     * @return PieceColorEnum
+     */
+    public static function WHITE() : PieceColorEnum
     {
         self::initialise();
 
         return self::$_white;
     }
 
-    /** @return: PieceColorEnum */
-    public static function BLACK()
+    /**
+     * @return PieceColorEnum
+     */
+    public static function BLACK() : PieceColorEnum
     {
         self::initialise();
 

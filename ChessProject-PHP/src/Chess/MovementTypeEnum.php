@@ -1,6 +1,6 @@
 <?php
 
-namespace LogicNow;
+namespace LogicNow\Chess;
 
 class MovementTypeEnum
 {
@@ -15,16 +15,20 @@ class MovementTypeEnum
         $this->_id = $_id;
     }
 
-    /** @return: MovementTypeEnum */
-    public static function MOVE()
+    /**
+     * @return MovementTypeEnum
+     */
+    public static function MOVE() : MovementTypeEnum
     {
         self::initialise();
 
         return self::$_move;
     }
 
-    /** @return: MovementTypeEnum */
-    public static function CAPTURE()
+    /**
+     * @return MovementTypeEnum
+     */
+    public static function CAPTURE() : MovementTypeEnum
     {
         self::initialise();
 

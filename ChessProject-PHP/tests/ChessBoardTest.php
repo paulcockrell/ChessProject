@@ -1,11 +1,12 @@
 <?php
 
-namespace LogicNow\Test;
+namespace LogicNow\Chess\Test;
 
-
-use LogicNow\ChessBoard;
-use LogicNow\PieceColorEnum;
-use LogicNow\Pawn;
+use LogicNow\Chess\{
+    ChessBoard,
+    PieceColorEnum,
+    Pieces\Pawn
+};
 
 class ChessBoardTest extends \PHPUnit_Framework_TestCase
 {
