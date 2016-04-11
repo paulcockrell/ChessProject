@@ -40,5 +40,4 @@ class MovementTypeEnum
         self::$_move = new MovementTypeEnum(1);
         self::$_capture = new MovementTypeEnum(2);
     }
-
 }

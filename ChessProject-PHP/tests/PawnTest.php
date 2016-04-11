@@ -7,10 +7,8 @@ use LogicNow\MovementTypeEnum;
 use LogicNow\Pawn;
 use LogicNow\PieceColorEnum;
 
-
 class PawnTest extends \PHPUnit_Framework_TestCase
 {
-
     /** @var  ChessBoard */
     private $_chessBoard;
     /** @var  Pawn */
@@ -20,7 +18,6 @@ class PawnTest extends \PHPUnit_Framework_TestCase
     {
         $this->_chessBoard = new ChessBoard();
         $this->_testSubject = new Pawn(PieceColorEnum::WHITE());
-
     }
 
     public function testChessBoard_Add_Sets_XCoordinate()
@@ -58,5 +55,4 @@ class PawnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(6, $this->_testSubject->getXCoordinate());
         $this->assertEquals(2, $this->_testSubject->getYCoordinate());
     }
-
 }

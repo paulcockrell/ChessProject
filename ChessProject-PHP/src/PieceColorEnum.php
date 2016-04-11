@@ -40,5 +40,4 @@ class PieceColorEnum
         self::$_white = new PieceColorEnum(1);
         self::$_black = new PieceColorEnum(2);
     }
-
 }

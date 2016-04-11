@@ -80,7 +80,7 @@ class ChessBoardTest extends \PHPUnit_Framework_TestCase
     {
         for ($i = 0; $i < 10; $i++) {
             $pawn = new Pawn(PieceColorEnum::BLACK());
-            $row = $i / ChessBoard::MAX_BOARD_WIDTH;
+            $row = round($i / ChessBoard::MAX_BOARD_WIDTH);
             $this->_testSubject->add($pawn, 6 + $row, $i % ChessBoard::MAX_BOARD_WIDTH, PieceColorEnum::BLACK());
             if ($row < 1) {
                 $this->assertEquals(6 + $row, $pawn->getXCoordinate());
@@ -91,5 +91,4 @@ class ChessBoardTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
-
 }
