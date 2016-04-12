@@ -14,33 +14,33 @@ class ChessBoard implements ChessBoardInterface
         $this->_pieces = array_fill(0, self::MAX_BOARD_WIDTH, array_fill(0, self::MAX_BOARD_HEIGHT, null));
     }
 
-	/**
-	 * Add a chess piece to the board
-	 *
-	 * Add a chess piece to the board if vacant board position
-	 *
-	 * @param \LogicNow\Chess\PieceInterface $piece
-	 * @param int $_xCoordinate
-	 * @param int $_yCoordinate
-	 *
-	 * @return bool $added
-	 */
+    /**
+     * Add a chess piece to the board
+     *
+     * Add a chess piece to the board if vacant board position
+     *
+     * @param \LogicNow\Chess\PieceInterface $piece
+     * @param int $_xCoordinate
+     * @param int $_yCoordinate
+     *
+     * @return bool $added
+     */
     public function add(PieceInterface $piece, int $_xCoordinate, int $_yCoordinate) : bool
     {
-		if ($this->isVacantBoardPosition($_xCoordinate, $_yCoordinate)) {
-			$piece->setChessBoard($this);
-    		$piece->setCoordinates($_xCoordinate, $_yCoordinate);
-		    $this->_pieces[$_xCoordinate][$_yCoordinate] = $piece;
-            
-			$isAdded = true;
-		}
-		else {
+        if ($this->isVacantBoardPosition($_xCoordinate, $_yCoordinate)) {
+            $piece->setChessBoard($this);
+            $piece->setCoordinates($_xCoordinate, $_yCoordinate);
+            $this->_pieces[$_xCoordinate][$_yCoordinate] = $piece;
+        
+            $isAdded = true;
+        }
+        else {
             $piece->setCoordinates(-1, -1);
-            
+    
             $isAdded = false;
-		}
+	}
 
-		return $isAdded;
+	return $isAdded;
     }
 
     /**
@@ -63,18 +63,18 @@ class ChessBoard implements ChessBoardInterface
      * @param null &$piece (optional)
      * @return bool
      */
-	public function getPieceAtBoardPosition(int $_xCoordinate, int $_yCoordinate, &$piece = null) : bool
-	{
-		if ($this->isLegalBoardPosition($_xCoordinate, $_yCoordinate)) {
-			$piece = $this->_pieces[$_xCoordinate][$_yCoordinate];
+    public function getPieceAtBoardPosition(int $_xCoordinate, int $_yCoordinate, &$piece = null) : bool
+    {
+        if ($this->isLegalBoardPosition($_xCoordinate, $_yCoordinate)) {
+    	    $piece = $this->_pieces[$_xCoordinate][$_yCoordinate];
             $gotPiece = is_null($piece);
-		}
+        }
         else {
             $gotPiece = false;
         }
-
-		return $gotPiece;
-	}
+    
+    	return $gotPiece;
+    }
 
     /**
      * Check if coordinates are legal board position
