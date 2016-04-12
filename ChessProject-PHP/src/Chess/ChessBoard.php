@@ -11,13 +11,13 @@ class ChessBoard implements ChessBoardInterface
 
     public function __construct()
     {
-        $this->_pieces = array_fill(0, self::MAX_BOARD_WIDTH, array_fill(0, self::MAX_BOARD_HEIGHT, 0));
+        $this->_pieces = array_fill(0, self::MAX_BOARD_WIDTH, array_fill(0, self::MAX_BOARD_HEIGHT, null));
     }
 
 	/**
 	 * Add a chess piece to the board
 	 *
-	 * Add a chess piece to the board if a valid board position is given, and the space is not already occupied
+	 * Add a chess piece to the board if vacant board position
 	 *
 	 * @param \LogicNow\Chess\PieceInterface $piece
 	 * @param int $_xCoordinate
@@ -27,53 +27,73 @@ class ChessBoard implements ChessBoardInterface
 	 */
     public function add(PieceInterface $piece, int $_xCoordinate, int $_yCoordinate) : bool
     {
-		$isAdded = false;
-
 		if ($this->isVacantBoardPosition($_xCoordinate, $_yCoordinate)) {
+			$piece->setChessBoard($this);
     		$piece->setCoordinates($_xCoordinate, $_yCoordinate);
 		    $this->_pieces[$_xCoordinate][$_yCoordinate] = $piece;
-
+            
 			$isAdded = true;
 		}
 		else {
             $piece->setCoordinates(-1, -1);
+            
+            $isAdded = false;
 		}
 
 		return $isAdded;
     }
 
-	/**
-	 * @param int $_xCoordinate
-	 * @param int $_yCoordinate
-	 * @return bool
-	 */
-    public function isLegalBoardPosition(int $_xCoordinate, int $_yCoordinate) : bool
-    {
-    	$isLegal = false;
-
-    	if (($_xCoordinate >= 0 && $_xCoordinate < self::MAX_BOARD_WIDTH)
-			&& ($_yCoordinate >= 0 && $_yCoordinate < self::MAX_BOARD_HEIGHT)
-		) {
-			$isLegal = true;
-		}
-
-		return $isLegal;
-    }
-
     /**
+     * Check if legal board position is vacant
+     * 
      * @param int $_xCoordinate
      * @param int $_yCoordinate
      * @return bool
      */
-    private function isVacantBoardPosition(int $_xCoordinate, int $_yCoordinate) : bool
+    public function isVacantBoardPosition(int $_xCoordinate, int $_yCoordinate) : bool
     {
-        $isVacant = false;
+        return $this->getPieceAtBoardPosition($_xCoordinate, $_yCoordinate);
+    }
 
-        if ($this->isLegalBoardPosition($_xCoordinate, $_yCoordinate)) {
-            $currentPiece = $this->_pieces[$_xCoordinate][$_yCoordinate];
-            $isVacant = !($currentPiece instanceof Piece);
+    /**
+     * Get piece if present at legal board position
+     * 
+     * @param int $_xCoordinate
+     * @param int $_yCoordinate
+     * @param null &$piece (optional)
+     * @return bool
+     */
+	public function getPieceAtBoardPosition(int $_xCoordinate, int $_yCoordinate, &$piece = null) : bool
+	{
+		if ($this->isLegalBoardPosition($_xCoordinate, $_yCoordinate)) {
+			$piece = $this->_pieces[$_xCoordinate][$_yCoordinate];
+            $gotPiece = is_null($piece);
+		}
+        else {
+            $gotPiece = false;
         }
 
-        return $isVacant;
+		return $gotPiece;
+	}
+
+    /**
+     * Check if coordinates are legal board position
+     *
+     * @param int $_xCoordinate
+     * @param int $_yCoordinate
+     * @return bool
+     */
+    public function isLegalBoardPosition(int $_xCoordinate, int $_yCoordinate) : bool
+    {
+        if (($_xCoordinate >= 0 && $_xCoordinate < self::MAX_BOARD_WIDTH)
+            && ($_yCoordinate >= 0 && $_yCoordinate < self::MAX_BOARD_HEIGHT)
+        ) {
+            $isLegal = true;
+        }
+        else {
+            $isLegal = false;
+        }
+
+        return $isLegal;
     }
 }

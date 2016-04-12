@@ -10,7 +10,6 @@ use LogicNow\Chess\{
 
 class ChessBoardTest extends \PHPUnit_Framework_TestCase
 {
-
     /** @var  ChessBoard */
     private $_testSubject;
 
@@ -32,36 +31,42 @@ class ChessBoardTest extends \PHPUnit_Framework_TestCase
     public function testIsLegalBoardPosition_True_X_equals_0_Y_equals_0()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(0, 0);
+
         $this->assertTrue($isValidPosition);
     }
 
     public function testIsLegalBoardPosition_True_X_equals_5_Y_equals_5()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(5, 5);
+
         $this->assertTrue($isValidPosition);
     }
 
     public function testIsLegalBoardPosition_False_X_equals_11_Y_equals_5()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(11, 5);
+
         $this->assertFalse($isValidPosition);
     }
 
     public function testIsLegalBoardPosition_False_X_equals_0_Y_equals_9()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(0, 9);
+
         $this->assertFalse($isValidPosition);
     }
 
     public function testIsLegalBoardPosition_False_X_equals_11_Y_equals_0()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(11, 0);
+
         $this->assertFalse($isValidPosition);
     }
 
     public function testIsLegalBoardPosition_False_For_Negative_Y_Values()
     {
         $isValidPosition = $this->_testSubject->isLegalBoardPosition(5, -1);
+
         $this->assertFalse($isValidPosition);
     }
 
@@ -69,10 +74,14 @@ class ChessBoardTest extends \PHPUnit_Framework_TestCase
     {
         $firstPawn = new Pawn(PieceColorEnum::BLACK());
         $secondPawn = new Pawn(PieceColorEnum::BLACK());
-        $this->_testSubject->add($firstPawn, 6, 3, PieceColorEnum::BLACK());
-        $this->_testSubject->add($secondPawn, 6, 3, PieceColorEnum::BLACK());
+        $addedFirst = $this->_testSubject->add($firstPawn, 6, 3);
+        $addedSecond = $this->_testSubject->add($secondPawn, 6, 3);
+
+        $this->assertTrue($addedFirst);
         $this->assertEquals(6, $firstPawn->getXCoordinate());
         $this->assertEquals(3, $firstPawn->getYCoordinate());
+
+        $this->assertFalse($addedSecond);
         $this->assertEquals(-1, $secondPawn->getXCoordinate());
         $this->assertEquals(-1, $secondPawn->getYCoordinate());
     }
@@ -81,11 +90,12 @@ class ChessBoardTest extends \PHPUnit_Framework_TestCase
     {
         for ($i = 0; $i < 10; $i++) {
             $pawn = new Pawn(PieceColorEnum::BLACK());
-            $row = round($i / ChessBoard::MAX_BOARD_WIDTH);
-            $this->_testSubject->add($pawn, 6 + $row, $i % ChessBoard::MAX_BOARD_WIDTH, PieceColorEnum::BLACK());
-            if ($row < 1) {
-                $this->assertEquals(6 + $row, $pawn->getXCoordinate());
-                $this->assertEquals($i % ChessBoard::MAX_BOARD_WIDTH, $pawn->getYCoordinate());
+            $row = round($i / ChessBoard::MAX_BOARD_HEIGHT) + 6;
+            $col = $i % ChessBoard::MAX_BOARD_WIDTH;
+            $this->_testSubject->add($pawn, $row, $col);
+            if ($row == 6) {
+                $this->assertEquals($row, $pawn->getXCoordinate());
+                $this->assertEquals($col, $pawn->getYCoordinate());
             } else {
                 $this->assertEquals(-1, $pawn->getXCoordinate());
                 $this->assertEquals(-1, $pawn->getYCoordinate());

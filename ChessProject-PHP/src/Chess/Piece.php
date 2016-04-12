@@ -19,6 +19,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Get piece reference to chessboard
+     * 
      * @return ChessBoardInterface
      */
     public final function getChessBoard() : ChessBoardInterface
@@ -27,6 +29,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Set piece reference to chessboard
+     * 
      * @param ChessBoardInterface $chessBoard
      */
     public final function setChessBoard(ChessBoardInterface $chessBoard)
@@ -35,6 +39,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Get X coordinate
+     * 
      * @return int
      */
     public final function getXCoordinate() : int
@@ -43,6 +49,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Set X coordinate
+     * 
      * @param int $_xCoordinate
      */
     public final function setXCoordinate(int $_xCoordinate)
@@ -51,6 +59,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Get piece Y coordinate
+     * 
      * @return int
      */
     public final function getYCoordinate() : int
@@ -59,19 +69,32 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Set piece Y coordinate
+     * 
      * @param int $_yCoordinate
      */
     public final function setYCoordinate(int $_yCoordinate)
     {
         $this->_yCoordinate = $_yCoordinate;
     }
-    
+
+    /**
+     * Set piece X and Y coordinates
+     * 
+     * @param int $_xCoordinate
+     * @param int $_yCoordinate
+     */
     public final function setCoordinates(int $_xCoordinate, int $_yCoordinate)
     {
         $this->setXCoordinate($_xCoordinate);
         $this->setYCoordinate($_yCoordinate);
     }
-    
+
+    /**
+     * Get piece coordinates
+     * 
+     * @return array
+     */
     public final function getCoordinates() : array
     {
         return [
@@ -81,6 +104,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Get piece color
+     * 
      * @return PieceColorEnum
      */
     public final function getPieceColor() : PieceColorEnum
@@ -89,6 +114,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Set piece color
+     * 
      * @param PieceColorEnum $value
      */
     public final function setPieceColor(PieceColorEnum $value)
@@ -97,6 +124,8 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Move functionality for piece, to be implemented in subclass
+     * 
      * @param MovementTypeEnum $movementTypeEnum
      * @param int $newX
      * @param int $newY
@@ -108,17 +137,11 @@ abstract class Piece implements PieceInterface
     }
 
     /**
+     * Generate string based on instance parameters
+     * 
      * @return string
      */
     public function toString() : string
-    {
-        return $this->currentPositionAsString();
-    }
-
-    /**
-     * @return string
-     */
-    private function currentPositionAsString() : string
     {
         return <<<EOT
 Current X: $this->_xCoordinate
