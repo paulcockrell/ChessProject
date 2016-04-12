@@ -141,12 +141,12 @@ abstract class Piece implements PieceInterface
      * 
      * @return string
      */
-    public function toString() : string
+    public function __toString() : string
     {
         return <<<EOT
 Current X: $this->_xCoordinate
 Current Y: $this->_yCoordinate
-Pieces Color: $this->_pieceColorEnum
+Color: $this->_pieceColorEnum
 EOT;
     }
 }

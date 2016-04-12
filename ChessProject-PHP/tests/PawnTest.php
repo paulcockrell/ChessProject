@@ -131,7 +131,7 @@ class PawnTest extends \PHPUnit_Framework_TestCase
     {
         $this->_chessBoard->add($this->_testSubject,0, 1);
         $moved = $this->_testSubject->move(MovementTypeEnum::MOVE(), 0, 3);
-
+        
         $this->assertTrue($moved);
         $this->assertEquals(0, $this->_testSubject->getXCoordinate());
         $this->assertEquals(3, $this->_testSubject->getYCoordinate());

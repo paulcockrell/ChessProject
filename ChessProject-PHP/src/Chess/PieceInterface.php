@@ -14,7 +14,6 @@ interface PieceInterface {
     public function getPieceColor() : PieceColorEnum;
     public function setPieceColor(PieceColorEnum $value);
     public function move(MovementTypeEnum $movementTypeEnum, int $newX, int $newY) : bool;
-    public function toString() : string;
 }
 
 ?>

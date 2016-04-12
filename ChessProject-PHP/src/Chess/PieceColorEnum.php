@@ -7,7 +7,10 @@ class PieceColorEnum
     private static $_instance = false;
     private static $_white;
     private static $_black;
-
+    private static $_enum_map = array(
+        1 => "White",
+        2 => "Black"
+    );
     private $_id;
 
     private function __construct($_id)
@@ -43,5 +46,10 @@ class PieceColorEnum
 
         self::$_white = new PieceColorEnum(1);
         self::$_black = new PieceColorEnum(2);
+    }
+    
+    public function __toString()
+    {
+        return self::$_enum_map[$this->_id];
     }
 }
