@@ -52,28 +52,15 @@ class ChessBoard implements ChessBoardInterface
      */
     public function isVacantBoardPosition(int $_xCoordinate, int $_yCoordinate) : bool
     {
-        return $this->getPieceAtBoardPosition($_xCoordinate, $_yCoordinate);
-    }
-
-    /**
-     * Get piece if present at legal board position
-     * 
-     * @param int $_xCoordinate
-     * @param int $_yCoordinate
-     * @param null &$piece (optional)
-     * @return bool
-     */
-    public function getPieceAtBoardPosition(int $_xCoordinate, int $_yCoordinate, &$piece = null) : bool
-    {
         if ($this->isLegalBoardPosition($_xCoordinate, $_yCoordinate)) {
-    	    $piece = $this->_pieces[$_xCoordinate][$_yCoordinate];
-            $gotPiece = is_null($piece);
+            $piece = $this->_pieces[$_xCoordinate][$_yCoordinate];
+            $isVacant = is_null($piece);
         }
         else {
-            $gotPiece = false;
+            $isVacant = false;
         }
-    
-    	return $gotPiece;
+
+        return $isVacant;
     }
 
     /**
